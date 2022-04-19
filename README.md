@@ -1,6 +1,10 @@
 # ヘビVR
 Unityで実装した赤外線を可視化するファイル並びにアプリに利用した関連ファイル
 
+[PV](https://www.youtube.com/watch?v=cCAgF45Rq8Q)
+
+[デモプレイ](https://www.youtube.com/watch?v=fDU2Zfb23Mk)
+
 ## 赤外線の可視化
 メインカメラにTemperatureMasterをアサインし、各オブジェクトにTemperatureAssignをアサインする。
 その後、高温に見せたいオブジェクトのTemperatureAssign.temperature_degreeの数値を高くする。（低温の場合は低くする）
