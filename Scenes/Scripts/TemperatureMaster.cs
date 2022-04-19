@@ -1,9 +1,12 @@
+// 視界の変化を操作するクラス
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+
+// switchflagを立ち上げることによって視界を変化させる
 
 public class TemperatureMaster : MonoBehaviour
 {
@@ -26,9 +29,6 @@ public class TemperatureMaster : MonoBehaviour
     public Camera camera;
 	public GameObject PointLight;
 	public GameObject Sunlight;
-	// Shader shader_standard;
-	// Shader shader_unlit;
-	// private SkinnedMeshRenderer skinnedMeshRenderer;
 
     void Awake()
     {
@@ -39,7 +39,6 @@ public class TemperatureMaster : MonoBehaviour
         SkyboxMaterialReplacement = new Material(TVSurfaceReplacement);
 		PointLight.SetActive(false);
 		Sunlight.SetActive(true);
-        // cam = GetComponent<Camera>();
     }
 
 	void Start()
@@ -53,8 +52,6 @@ public class TemperatureMaster : MonoBehaviour
 			// もとの色を保持させる
 			TC.cachedColor = R.material.color;
 		}
-		// shader_unlit = Shader.Find("Unlit/Texture");
-		// shader_standard = Shader.Find("Standard");
 	}
 
     // Update is called once per frame
@@ -83,30 +80,14 @@ public class TemperatureMaster : MonoBehaviour
 
 						TC.gameObject.GetComponent<Renderer>().material.SetOverrideTag("RenderType", "Temperature");
 						TC.gameObject.GetComponent<Renderer>().material.color = new Color(degree2float(TC.temperature_degree), 0, 0, 0);
-						// TC.gameObject.GetComponent<Renderer>().material.shader = shader_unlit;
-						// skinnedMeshRenderer = TC.gameObject.GetComponent<SkinnedMeshRenderer>();
-						// skinnedMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;
-						// skinnedMeshRenderer.receiveShadows = false;
-						// Debug.Log(degree2float(TC.temperature_degree));
-						// Debug.Log(TC.gameObject.GetComponent<Renderer>().material.color.r);
-
-						//delete shade
-						// foreach(var obj in FindObjectOfType<GameObject>())
-						// {
-						// 	obj.GetComponent<Renderer>().material.shader = shader_unlit;
-						// 	// Shader.Find("Standard")
-						// }
 						
 					}
-					// everything else
-					// cam.SetReplacementShader(TVSurfaceReplacement, "RenderType");
 			}
 			else{
 				// ポイントライト消灯
 				Sunlight.SetActive(true);
 				PointLight.SetActive(false);
 
-				// DebugUIBuilder.instance.AddLabel("Normal Vision");
 					// 空の背景色をSkyboxMaterialCachedに変更
 					RenderSettings.skybox = SkyboxMaterialCached;
 
@@ -116,20 +97,9 @@ public class TemperatureMaster : MonoBehaviour
 						if (R==null) continue;
 						TC.gameObject.GetComponent<Renderer>().material.SetOverrideTag("RenderType", TC.cachedMaterialTag);
 						TC.gameObject.GetComponent<Renderer>().material.color = TC.cachedColor;
-						// TC.gameObject.GetComponent<Renderer>().material.shader = shader_standard;
-						// skinnedMeshRenderer = TC.gameObject.GetComponent<SkinnedMeshRenderer>();
-						// skinnedMeshRenderer.shadowCastingMode = ShadowCastingMode.On;
-						// skinnedMeshRenderer.receiveShadows = true;
-
 					}
 					// everything else
 					camera.ResetReplacementShader();
-
-					//delete shade
-						// foreach(var obj in GameObjectList)
-						// {
-						// 	obj.GetComponent<Renderer>().material.shader = shader_standard;
-						// }
 			}
 		}
         
@@ -141,17 +111,8 @@ public class TemperatureMaster : MonoBehaviour
 		Shader.SetGlobalFloat("_EnvironmentTemperature", degree2float(environmentTemperature));
 		ThermalVisionMaterial.SetFloat("_EnvironmentTemperature", degree2float(environmentTemperature));
 		if (TVflag) {
-			// if (useTexture==1 || useTexture==2) {
-			// 	// TVPostProcessingMaterial.SetInt("useTexture", useTexture);
             ThermalVisionMaterial.SetTexture("_ReferencePalette", ReferencePalette);
 			
-
-			// } else {
-			// 	TVPostProcessingMaterial.SetInt("useTexture", 0);
-			// 	TVPostProcessingMaterial.SetColor("coolColor", coolColor);
-			// 	TVPostProcessingMaterial.SetColor("midColor", midColor);
-			// 	TVPostProcessingMaterial.SetColor("warmColor", warmColor);
-			// }
 			Graphics.Blit(src, dst, ThermalVisionMaterial);
 
 		} else {

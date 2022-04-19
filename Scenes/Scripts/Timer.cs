@@ -1,3 +1,5 @@
+// 画面上のタイマーを表示する
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

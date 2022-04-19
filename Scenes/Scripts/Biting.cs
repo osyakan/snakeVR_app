@@ -1,3 +1,4 @@
+// 飛びついて噛みつく場合のアクション
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

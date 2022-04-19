@@ -1,3 +1,5 @@
+// 食べられるネズミにアサインする
+// プレイヤー（"OVRCameraRig"Collider）に触れられると消滅する
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +19,6 @@ public class TouchedByHands : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "OVRCameraRig")
-        // if (collision.gameObject.name == "Player")
         {
             Destroy(this.gameObject);            
             int tmp = int.Parse(obj.text) + 1;

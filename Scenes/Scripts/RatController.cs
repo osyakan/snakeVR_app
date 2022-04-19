@@ -1,15 +1,18 @@
+// フィールド内にランダムにネズミを表示させる
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RatController : MonoBehaviour
 {
+    // ratにはBeEatenをアサインされたプレハブを指定
     public GameObject rat;
     public bool destroy_flag;
-    // public GameObject player;
-    
+
     void Start()
     {
+
         rat = GameObject.Find("Rat");
         CreateRat();
         CreateRat();
@@ -17,18 +20,14 @@ public class RatController : MonoBehaviour
         CreateRat();
     }
 
-
+    // ネズミをランダムに生成させる関数
     public void CreateRat()
     {
-        //50
         Vector3 coor;
         Vector3 player_coor = GameObject.Find("Player").transform.position;
         float r = 100f;
-        // do{
-        //     coor.x = Random.Range(170f, -240f);
-        //     coor.z = Random.Range(150f, -140f);
-        //     coor.y = 0f;
-        // }while(Vector3.Distance(coor, player_coor)>=30&&Vector3.Distance(coor, player_coor)<=100);
+
+        // プレイヤー周辺の座標をランダム生成し、その座標にネズミを生成する
         do{
             coor.x = Random.Range(r, -r);
             coor.z = Random.Range(r, -r);
